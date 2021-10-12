@@ -1,0 +1,64 @@
+<form>
+    <div>
+        <input 
+        type="text" 
+        name="fromWhere" 
+        placeholder="From where" 
+        #city1
+        (change)="getAirports(city1.value, 'origin')"
+        />
+
+        <ng-container *ngIf="originAirports == undefined; else showOriginAirports">
+            <p>Pass a city</p>
+        </ng-container>
+
+        <ng-template #showOriginAirports>
+            <ng-container *ngIf="originAirports == 'empty'; else originAirportsChoice">
+                <p>We dont have airports here</p>
+            </ng-container>
+            <ng-template #originAirportsChoice>
+                <select id="origin" multiple>
+                    <option 
+                    *ngFor="let airport of originAirports"
+                    value="{{airport.PlaceId}}">
+                    {{ airport.PlaceName }}
+                </option>
+                </select>
+            </ng-template>
+        </ng-template>
+    </div>
+
+    <div>
+        <input 
+        type="text" 
+        name="where" 
+        placeholder="Where" 
+        #city2
+        (change)="getAirports(city2.value, 'destination')"
+        />
+
+        <ng-container *ngIf="destinationAirports == undefined; else showDestinationAirports">
+            <p>Pass a city</p>
+        </ng-container>
+
+        <ng-template #showDestinationAirports>
+            <ng-container *ngIf="destinationAirports == 'empty'; else destinationAirportsChoice">
+                <p>We dont have airports here</p>
+            </ng-container>
+            <ng-template #destinationAirportsChoice>
+                <select id="destination" multiple>
+                    <option 
+                    *ngFor="let airport of destinationAirports"
+                    value="{{airport.PlaceId}}"
+                    >
+                    {{ airport.PlaceName }}
+                    </option>
+                </select>
+            </ng-template>
+        </ng-template>
+
+        <button type="button" onclick="">
+            CHECK PRICE
+        </button>
+    </div>
+</form>

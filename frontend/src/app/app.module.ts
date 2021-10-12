@@ -4,10 +4,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DestinationFormComponent } from './components/destination-form/destination-form.component';
+import { AirportButtonComponent } from './components/airport-button/airport-button.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DestinationFormComponent,
+    AirportButtonComponent
   ],
   imports: [
     BrowserModule,
