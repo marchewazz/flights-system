@@ -17,7 +17,7 @@
                 <p>We dont have airports here</p>
             </ng-container>
             <ng-template #originAirportsChoice>
-                <select id="origin" multiple>
+                <select [formControl]="originAirportsControl" multiple>
                     <option 
                     *ngFor="let airport of originAirports"
                     value="{{airport.PlaceId}}">
@@ -46,7 +46,7 @@
                 <p>We dont have airports here</p>
             </ng-container>
             <ng-template #destinationAirportsChoice>
-                <select id="destination" multiple>
+                <select [formControl]="destinationAirportsControl" multiple>
                     <option 
                     *ngFor="let airport of destinationAirports"
                     value="{{airport.PlaceId}}"
@@ -57,8 +57,31 @@
             </ng-template>
         </ng-template>
 
-        <button type="button" onclick="">
+        <button 
+        type="button" 
+        (click)="checkPrices()"
+        >
             CHECK PRICE
         </button>
+        <div>
+            <form>
+                <ng-container *ngFor="let flight of flights; let i = index" >
+                    <input 
+                    type="radio" 
+                    name="ticketOptions"
+                    id="{{i}}"
+                    >
+                    <label for="{{i}}">
+                        <app-airport-button 
+                        carrier="{{flight.carriers}}"
+                        dateTime="{{flight.dateTime}}"
+                        originDetails="{{flight.originDetails.cityName}}"
+                        destinationDetails="{{flight.destinationDetails.cityName}}"
+                        price="{{flight.moneyDetails.price + flight.moneyDetails.symbol}}"
+                        ></app-airport-button>
+                    </label> 
+                </ng-container>
+            </form>
+        </div>
     </div>
 </form>

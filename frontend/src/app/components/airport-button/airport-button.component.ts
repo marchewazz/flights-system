@@ -7,6 +7,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class AirportButtonComponent implements OnInit {
 
+  @Input() carrier = '';
+  @Input() dateTime = '';
+  @Input() originDetails = '';
+  @Input() destinationDetails = '';
+  @Input() price = '';
+
   constructor() { }
 
   ngOnInit(): void {
