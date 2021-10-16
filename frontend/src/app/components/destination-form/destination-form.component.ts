@@ -73,12 +73,46 @@ export class DestinationFormComponent implements OnInit {
       var flights : Flight[] = []
       for (var originAirport of originAirports){
         for (var destinationAirport of destinationAirports){
+          let originCode = originAirport.split("-")[0]
+          let destinationCode = destinationAirport.split("-")[0]
           this.cas.getFlights(originAirport, destinationAirport).subscribe((res) => {
             const info : any = res
             console.log(info);
-
             if (info.Quotes.length !== 0){
               
+              console.log(originAirport, originCode, destinationAirport, destinationCode);
+              let originCity = {
+                cityName: '',
+                airportName: '',
+                airportCode: '',
+                country: ''
+              };
+              let destinationCity = {
+                cityName: '',
+                airportName: '',
+                airportCode: '',
+                country: ''
+              };
+
+              for (var place of info.Places){
+                if (place.IataCode == originCode){
+                  originCity = {
+                    cityName: place.CityName,
+                    airportName: place.Name,
+                    airportCode: place.IataCode,
+                    country: place.CountryName
+                  }
+                }
+                if (place.IataCode == destinationCode){
+                  destinationCity = {
+                    cityName: place.CityName,
+                    airportName: place.Name,
+                    airportCode: place.IataCode,
+                    country: place.CountryName
+                  }
+                }
+              }
+
               flights.push({
               carriers : info.Carriers[0].Name,
               dateTime: info.Quotes[0].QuoteDateTime,
@@ -88,18 +122,8 @@ export class DestinationFormComponent implements OnInit {
                 code: info.Currencies[0].Code,
                 symbol: info.Currencies[0].Symbol
               },
-              originDetails: {
-                cityName: info.Places[info.Places.length - 1].CityName,
-                airportName: info.Places[info.Places.length - 1].Name,
-                airportCode: info.Places[info.Places.length - 1].IataCode,
-                country: info.Places[info.Places.length - 1].CountryName
-              },
-              destinationDetails: {
-                cityName: info.Places[0].CityName,
-                airportName: info.Places[0].Name,
-                airportCode: info.Places[0].IataCode,
-                country: info.Places[0].CountryName
-              }
+              originDetails: originCity,
+              destinationDetails: destinationCity
             })
             } 
           })
