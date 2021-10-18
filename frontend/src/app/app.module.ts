@@ -7,12 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DestinationFormComponent } from './components/destination-form/destination-form.component';
 import { AirportButtonComponent } from './components/airport-button/airport-button.component';
+import { GoogleMapsRedirectComponent } from './components/google-maps-redirect/google-maps-redirect.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DestinationFormComponent,
-    AirportButtonComponent
+    AirportButtonComponent,
+    GoogleMapsRedirectComponent
   ],
   imports: [
     BrowserModule,

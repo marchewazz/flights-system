@@ -1,7 +1,18 @@
 <div>
-    {{carrier}}
-    {{dateTime}}
-    {{originDetails}}
-    {{destinationDetails}}
-    {{price}}
+    <p>Carrier: {{carrier}}</p>
+    <p>Date: {{dateTime.split("T")[0]}}</p>
+    <p>Time: {{dateTime.split("T")[1]}}</p>
+    <p>From: 
+        <span *ngFor="let property of originDetails | keyvalue">
+            {{property.value + "; "}}
+        </span>
+        <app-google-maps-redirect airport="{{originDetails.airportName}}"></app-google-maps-redirect>
+    </p>
+    <p>To: 
+        <span *ngFor="let property of destinationDetails | keyvalue">
+            {{property.value + "; "}}
+        </span>
+        <app-google-maps-redirect airport="{{destinationDetails.airportName}}"></app-google-maps-redirect>
+    </p>
+    <p>Price: {{price}}</p>
 </div>

@@ -9,8 +9,8 @@ export class AirportButtonComponent implements OnInit {
 
   @Input() carrier = '';
   @Input() dateTime = '';
-  @Input() originDetails = '';
-  @Input() destinationDetails = '';
+  @Input() originDetails: any;
+  @Input() destinationDetails : any;
   @Input() price = '';
 
   constructor() { }
