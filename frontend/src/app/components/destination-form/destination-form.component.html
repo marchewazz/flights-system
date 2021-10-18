@@ -7,11 +7,11 @@
         #city1
         (change)="getAirports(city1.value, 'origin')"
         />
-
+        <!--CHECKING IF ANYTHING IS PASSED-->
         <ng-container *ngIf="originAirports == undefined; else showOriginAirports">
             <p>Pass a city</p>
         </ng-container>
-
+        <!--WHEN SOMETHING IS PASSED IT'S GENERATING OPTIONS FOR AIRPORTS OR SHOWS THAT THERE ARE NOT ANY AIRPORT NEAR-->
         <ng-template #showOriginAirports>
             <ng-container *ngIf="originAirports == 'empty'; else originAirportsChoice">
                 <p>We dont have airports here</p>
@@ -36,11 +36,11 @@
         #city2
         (change)="getAirports(city2.value, 'destination')"
         />
-
+        <!--CHECKING IF ANYTHING IS PASSED-->
         <ng-container *ngIf="destinationAirports == undefined; else showDestinationAirports">
             <p>Pass a city</p>
         </ng-container>
-
+        <!--WHEN SOMETHING IS PASSED IT'S GENERATING OPTIONS FOR AIRPORTS OR SHOWS THAT THERE ARE NOT ANY AIRPORT NEAR-->
         <ng-template #showDestinationAirports>
             <ng-container *ngIf="destinationAirports == 'empty'; else destinationAirportsChoice">
                 <p>We dont have airports here</p>
@@ -56,13 +56,14 @@
                 </select>
             </ng-template>
         </ng-template>
-
+        <!--SIMPLE BUTTON FOR CHECKING PRICE-->
         <button 
         type="button" 
         (click)="checkPrices()"
         >
         CHECK PRICE
         </button>
+        <!--CHECKING IF THERE ARE FLIGHTS FROM CHOOSED AIRPORTS TO CHOOSED AIRPORTS-->
         <div *ngIf="flights.length > 0; else noFlights">
             <form>
                 <ng-container *ngFor="let flight of flights; let i = index" >

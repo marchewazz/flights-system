@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./airport-button.component.scss']
 })
 export class AirportButtonComponent implements OnInit {
-
+  //SOME PARAMETERS
   @Input() carrier = '';
   @Input() dateTime = '';
   @Input() originDetails: any;
