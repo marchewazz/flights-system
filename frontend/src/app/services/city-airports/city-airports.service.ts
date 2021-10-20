@@ -1,7 +1,7 @@
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { apiKey } from './apiKey';
+import { apiKey } from '../apiKey';
 
 const httpOptions = {
   headers: new HttpHeaders({

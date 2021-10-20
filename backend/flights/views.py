@@ -1,5 +1,9 @@
-from django.http import JsonResponse
+import json
+from django.http import HttpResponse, JsonResponse
+import json
+from django.views.decorators.csrf import csrf_exempt
 
-
-def index(request):
-    return JsonResponse({'message': 'Hello its main page of flights system!'})
+@csrf_exempt
+def ticketSystem(request):
+    ticket = json.loads(request.body)
+    return JsonResponse(ticket)

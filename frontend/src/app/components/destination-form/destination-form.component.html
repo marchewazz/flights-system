@@ -65,12 +65,14 @@
         </button>
         <!--CHECKING IF THERE ARE FLIGHTS FROM CHOOSED AIRPORTS TO CHOOSED AIRPORTS-->
         <div *ngIf="flights.length > 0; else noFlights">
-            <form>
+            <form (submit)="order($event)">
                 <ng-container *ngFor="let flight of flights; let i = index" >
                     <input 
                     type="radio" 
                     name="ticketOptions"
                     id="{{i}}"
+                    [value]="flight"
+                    [(ngModel)]="selectedTicketControl"
                     required
                     >
                     <label for="{{i}}">
@@ -83,6 +85,11 @@
                     ></app-airport-button>
                     </label> 
                 </ng-container>
+                <div class="ticketInfos">
+                    <input type="text" [formControl]=ticketNameAndSurname placeholder="Name and surname" required>
+                    <input type="email" [formControl]=ticketEmail placeholder="E-Mail" required>
+                </div>
+                <button type="submit">BUY TICKETS</button>
             </form>
         </div>
 

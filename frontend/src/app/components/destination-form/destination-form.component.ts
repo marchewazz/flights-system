@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { CityAirportsService } from '../../services/city-airports.service';
-
+import { CityAirportsService } from '../../services/city-airports/city-airports.service';
+import { TicketSystemService } from 'src/app/services/ticket-system/ticket-system.service';
 @Component({
   selector: 'app-destination-form',
   templateUrl: './destination-form.component.html',
@@ -15,9 +15,12 @@ export class DestinationFormComponent implements OnInit {
   originAirportsControl = new FormControl();
   destinationAirportsControl = new FormControl();
   dataProblem : string = '';
-  flights : any[] = []
+  flights : any[] = [];
+  selectedTicketControl : any;
+  ticketNameAndSurname = new FormControl();
+  ticketEmail = new FormControl();
 
-  constructor(private cas: CityAirportsService) {}
+  constructor(private cas: CityAirportsService, private tss: TicketSystemService) {}
 
   ngOnInit(): void {}
   getAirports(city : string, whichCities : string) : void {
@@ -147,6 +150,27 @@ export class DestinationFormComponent implements OnInit {
       //IF ONE OF ARRAYS IS EMPTY IT'S ERROR
       this.dataProblem = "Missing airports";
       console.log(this.dataProblem);
+    }
+  }
+  order(event : any) {
+    event.preventDefault()
+    const selectedTicket = this.selectedTicketControl;
+    const nameAndSurname = this.ticketNameAndSurname.value;
+    const email = this.ticketEmail.value
+    if (selectedTicket == undefined || nameAndSurname == null || email == null) {
+      alert('wrong');
+    } else {
+      const ticket = {
+        flight: selectedTicket,
+        person: {
+          email: email,
+          nameAndSurname: nameAndSurname
+        }
+      }
+      this.tss.generateTicket(ticket).subscribe((res) =>{
+        const info : any = res
+        console.log(info);
+      })
     }
   }
 }
