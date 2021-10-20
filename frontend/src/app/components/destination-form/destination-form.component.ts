@@ -24,6 +24,14 @@ export class DestinationFormComponent implements OnInit {
 
   ngOnInit(): void {}
   getAirports(city : string, whichCities : string) : void {
+    //SOMETIMES THERE ARE CITIES IN RESPONSE AND THEY CAUSE BUGS THIS FUNCTION DELETES THEM
+    function deleteCities(airports: any){
+      for(var i = 0; i <= airports.length - 1; i++){
+        let currentAirport = airports[i]
+        if(currentAirport.CityId == currentAirport.PlaceId) airports.splice(i, 1)
+      }
+      return airports
+    }
     //FUNCTION GETS AIRPORTS FOR SELECT OPTION
     //WHICHCITIES PARAMETER SAYS IF IT'S ORIGIN INPUT OR DESTINATION
     if (city != ''){
@@ -32,12 +40,13 @@ export class DestinationFormComponent implements OnInit {
           this.originAirports = res;
           //RETURNS EMPTY IF THERE ARE NO AIRPORTS NEAR CITY
           this.originAirports = (this.originAirports.Places.length > 0 ? this.originAirports.Places : 'empty')
+          if(this.originAirports != 'empty') deleteCities(this.originAirports)
         }
         if (whichCities == 'destination') {
           this.destinationAirports = res;
           //RETURNS EMPTY IF THERE ARE NO AIRPORTS NEAR CITY
           this.destinationAirports = (this.destinationAirports.Places.length > 0 ? this.destinationAirports.Places : 'empty')
-
+          if(this.destinationAirports != 'empty') deleteCities(this.destinationAirports)
         }
         console.log(this.originAirports, this.destinationAirports);
       });
@@ -152,7 +161,7 @@ export class DestinationFormComponent implements OnInit {
       console.log(this.dataProblem);
     }
   }
-  order(event : any) {
+  orderTicket(event : any) {
     event.preventDefault()
     const selectedTicket = this.selectedTicketControl;
     const nameAndSurname = this.ticketNameAndSurname.value;

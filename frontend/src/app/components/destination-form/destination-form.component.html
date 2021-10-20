@@ -65,7 +65,7 @@
         </button>
         <!--CHECKING IF THERE ARE FLIGHTS FROM CHOOSED AIRPORTS TO CHOOSED AIRPORTS-->
         <div *ngIf="flights.length > 0; else noFlights">
-            <form (submit)="order($event)">
+            <form (submit)="orderTicket($event)">
                 <ng-container *ngFor="let flight of flights; let i = index" >
                     <input 
                     type="radio" 
