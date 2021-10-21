@@ -6,6 +6,7 @@
         placeholder="From where" 
         #city1
         (change)="getAirports(city1.value, 'origin')"
+        (keyup)="getAirports(city1.value, 'origin')"
         />
         <!--CHECKING IF ANYTHING IS PASSED-->
         <ng-container *ngIf="originAirports == undefined; else showOriginAirports">

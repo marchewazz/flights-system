@@ -167,7 +167,7 @@ export class DestinationFormComponent implements OnInit {
     const nameAndSurname = this.ticketNameAndSurname.value;
     const email = this.ticketEmail.value
     if (selectedTicket == undefined || nameAndSurname == null || email == null) {
-      alert('wrong');
+      alert('Pass data');
     } else {
       const ticket = {
         flight: selectedTicket,
