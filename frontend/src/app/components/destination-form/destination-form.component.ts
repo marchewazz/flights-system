@@ -138,7 +138,7 @@ export class DestinationFormComponent implements OnInit {
 
               flights.push({
               carriers : info.Carriers[0].Name,
-              //API RETURNS DEPARTURE DATE WITH 0:00 SO ITS CONNECTING DEPARTURE DATE WITH QUOTE TIME TO GET DIFFERENT HOUR
+              //API RETURNS DEPARTURE DATE AS 0:00 SO ITS CONNECTING DEPARTURE DATE WITH QUOTE TIME TO GET DIFFERENT HOUR
               dateTime: info.Quotes[0].OutboundLeg.DepartureDate.split("T")[0]+"T"+info.Quotes[0].QuoteDateTime.split("T")[1],
               direct: true,
               moneyDetails : {
