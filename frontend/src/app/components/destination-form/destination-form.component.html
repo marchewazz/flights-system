@@ -5,7 +5,6 @@
         name="fromWhere" 
         placeholder="From where" 
         #origin
-        (change)="getAirports(origin.value, 'origin')"
         (keyup)="getAirports(origin.value, 'origin')"
         />
         <!--CHECKING IF ANYTHING IS PASSED-->
@@ -35,8 +34,7 @@
         name="where" 
         placeholder="Where" 
         #destination
-        (change)="getAirports(destination.value, 'destination')"
-        (keyup)="getAirports(destination.value, 'origin')"
+        (keyup)="getAirports(destination.value, 'destination')"
         />
         <!--CHECKING IF ANYTHING IS PASSED-->
         <ng-container *ngIf="destinationAirports == undefined; else showDestinationAirports">
