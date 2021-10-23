@@ -171,14 +171,24 @@ export class DestinationFormComponent implements OnInit {
       console.log(this.dataProblem);
     }
   }
+
   orderTicket(event : any) {
     event.preventDefault()
     const selectedTicket = this.selectedTicketControl;
     const nameAndSurname = this.ticketNameAndSurname.value;
     const email = this.ticketEmail.value
+
+    function validateEmail(email: any) {
+      const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    }
+
     if (selectedTicket == undefined || nameAndSurname == null || email == null) {
       alert('Pass data');
-    } else {
+    } else if(!validateEmail(email)){
+      alert('Email isn\'t valid');
+    } 
+    else {
       const ticket = {
         flight: selectedTicket,
         person: {
@@ -190,6 +200,7 @@ export class DestinationFormComponent implements OnInit {
         const info : any = res
         console.log(info);
       })
+      alert(`Ticket is sent on email: ${email}`)
     }
   }
 }

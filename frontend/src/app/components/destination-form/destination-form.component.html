@@ -73,7 +73,6 @@
                     id="{{i}}"
                     [value]="flight"
                     [(ngModel)]="selectedTicketControl"
-                    required
                     >
                     <label for="{{i}}">
                         <app-airport-button 
@@ -86,8 +85,12 @@
                     </label> 
                 </ng-container>
                 <div class="ticketInfos">
-                    <input type="text" [formControl]=ticketNameAndSurname placeholder="Name and surname" required>
-                    <input type="email" [formControl]=ticketEmail placeholder="E-Mail" required>
+                    <input type="text" 
+                    [formControl]=ticketNameAndSurname 
+                    placeholder="Name and surname">
+                    <input type="email" 
+                    [formControl]=ticketEmail 
+                    placeholder="E-Mail">
                 </div>
                 <button type="submit">BUY TICKETS</button>
             </form>
