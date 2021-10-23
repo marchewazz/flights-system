@@ -14,7 +14,7 @@ export class DestinationFormComponent implements OnInit {
   destinationAirports : any;
   originAirportsControl = new FormControl();
   destinationAirportsControl = new FormControl();
-  dataProblem : string = '';
+  dataProblem : string = "";
   flights : any[] = [];
   selectedTicketControl : any;
   ticketNameAndSurname = new FormControl();
@@ -34,7 +34,7 @@ export class DestinationFormComponent implements OnInit {
     }
     //FUNCTION GETS AIRPORTS FOR SELECT OPTION
     //WHICHCITIES PARAMETER SAYS IF IT'S ORIGIN INPUT OR DESTINATION
-    if (city != ''){
+    if (city != ""){
       this.cas.getAirports(city).subscribe((res) => {
         if (whichCities == 'origin') {
           this.originAirports = res;
@@ -105,16 +105,16 @@ export class DestinationFormComponent implements OnInit {
               //IF WE GOT FLIGHT OPTION IN RESPONSE WE PUSH IT TO ARRAY FLIGHTS
               console.log(originAirport, originCode, destinationAirport, destinationCode);
               let originCity = {
-                cityName: '',
-                airportName: '',
-                airportCode: '',
-                country: ''
+                cityName: "",
+                airportName: "",
+                airportCode: "",
+                country: ""
               };
               let destinationCity = {
-                cityName: '',
-                airportName: '',
-                airportCode: '',
-                country: ''
+                cityName: "",
+                airportName: "",
+                airportCode: "",
+                country: ""
               };
 
               for (var place of info.Places){
@@ -135,20 +135,29 @@ export class DestinationFormComponent implements OnInit {
                   }
                 }
               }
-
-              flights.push({
-              carriers : info.Carriers[0].Name,
-              //API RETURNS DEPARTURE DATE AS 0:00 SO ITS CONNECTING DEPARTURE DATE WITH QUOTE TIME TO GET DIFFERENT HOUR
-              dateTime: info.Quotes[0].OutboundLeg.DepartureDate.split("T")[0]+"T"+info.Quotes[0].QuoteDateTime.split("T")[1],
-              direct: true,
-              moneyDetails : {
-                price: info.Routes[0].Price,
-                code: info.Currencies[0].Code,
-                symbol: info.Currencies[0].Symbol
-              },
-              originDetails: originCity,
-              destinationDetails: destinationCity
-            })
+              //SOMETIMES THERE'S ERROR WITH CITIES AND CITY DATA IS EMPTY STRING
+              //THIS FUNCTIONS SOLVES THIS PROBLEM AND JUST DOESN'T PUSH CITY LIKE IT
+              function isCityValid(city: any){
+                for(var key in city){
+                  if(city[key] == "") return false
+                }
+                return true
+              }
+              if(isCityValid(originCity) && isCityValid(destinationCity)){
+                flights.push({
+                carriers : info.Carriers[0].Name,
+                //API RETURNS DEPARTURE DATE AS 0:00 SO ITS CONNECTING DEPARTURE DATE WITH QUOTE TIME TO GET DIFFERENT HOUR
+                dateTime: info.Quotes[0].OutboundLeg.DepartureDate.split("T")[0]+"T"+info.Quotes[0].QuoteDateTime.split("T")[1],
+                direct: true,
+                moneyDetails : {
+                  price: info.Routes[0].Price,
+                  code: info.Currencies[0].Code,
+                  symbol: info.Currencies[0].Symbol
+                },
+                originDetails: originCity,
+                destinationDetails: destinationCity
+              })
+            }
             } 
           })
         }
