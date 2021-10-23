@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your ticket</title>
+    <style type="text/css">
+        @page {
+            size: A4;
+            margin: 1cm;
+        }
+        .header{
+            font-size: 50px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .ticketData{
+            font-size: 25px;
+        }  
+        .ticketData p {
+            border-bottom: 1px #000 solid;
+        }
+        .ticketQR{
+            height: 300px;
+            width: 300px;
+            margin-left: 200px;
+        }
+        .footer{
+            text-align: center;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <p>TICKET NO. {{orderKey}}</p>
+    </div>
+    
+    <div class="ticketData">
+        {% with origin=flight.originDetails destination=flight.destinationDetails%}
+        <p>Person: {{person.nameAndSurname}}</p>
+        <p>Carrier: {{flight.carriers}}</p>
+        <p>Departure date: {{flight.dateTime}}</p>
+        <p>Origin: {{origin.cityName}},{{origin.airportName}},{{origin.airportCode}},{{origin.country}}</p>
+        <p>Destiantion: {{destination.cityName}},{{destination.airportName}},{{destination.airportCode}},{{destination.country}}</p>
+        <p>Price: {{flight.moneyDetails.price}}{{flight.moneyDetails.symbol}}</p>
+        {% endwith %}
+        <div class="ticketQR">
+            <img 
+            src='https://lh3.googleusercontent.com/pw/AM-JKLWq_Dq0teQndM3zws4pWBILZqqlKJPxm-85i_Csc2TI8MKmigwiz6HhqItSyY-JLgZ3-EEdm1jcIwrZfe8Q6rO5tVQEKFJpPW63yK8mm5uTWSf5cNkERSLjYAv7uiH8ooxtDJ3VKJAuECnzrKd7lIT4=s917-no?authuser=0'
+            alt="cos tam">
+        </div>
+    </div>
+    <div class="footer">
+        GENERATED ON: {{generationTime}}
+    </div>
+</body>
+</html>
