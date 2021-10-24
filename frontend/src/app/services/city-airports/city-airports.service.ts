@@ -23,11 +23,11 @@ export class CityAirportsService {
     return this.http.get(apiUrl, httpOptions)
   }
 
-  getFlights(origin : string, destination : string) : Observable<Object>{
+  getFlights(origin : string, destination : string, currency: string) : Observable<Object>{
     var todayDate = new Date().toISOString().slice(0, 10);
     console.log(todayDate);
     
-    const apiUrl = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${origin}/${destination}/${todayDate}`
+    const apiUrl = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/${currency}/en-US/${origin}/${destination}/${todayDate}`
     return this.http.get(apiUrl, httpOptions)
   }
 }

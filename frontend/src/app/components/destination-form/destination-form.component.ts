@@ -19,8 +19,12 @@ export class DestinationFormComponent implements OnInit {
   selectedTicketControl : any;
   ticketNameAndSurname = new FormControl();
   ticketEmail = new FormControl();
-
-  constructor(private cas: CityAirportsService, private tss: TicketSystemService) {}
+  ticketCurrency : string[] = ['USD', 'JPY', 'EUR', 'PLN', 'CAD', 'CHF', 'GBP', 'AUD', 'CNY', 'RUB'];
+  ticketCurrencyControl = new FormControl();
+  
+  constructor(private cas: CityAirportsService, private tss: TicketSystemService) {
+    this.ticketCurrencyControl.setValue(this.ticketCurrency[0])
+  }
 
   ngOnInit(): void {}
   getAirports(city : string, whichCities : string) : void {
@@ -85,6 +89,7 @@ export class DestinationFormComponent implements OnInit {
 
     const originAirports : string[] = this.originAirportsControl.value;
     const destinationAirports : string[] = this.destinationAirportsControl.value;
+    const currency = this.ticketCurrencyControl.value;
     //THESE VARIABLES STORE VALUES FROM FORM CONTROL, THEY ARE CODES OF THE CHOOSED AIRPORTS
     console.log(originAirports, destinationAirports);
     
@@ -97,7 +102,7 @@ export class DestinationFormComponent implements OnInit {
           //IT'S BECAUSE IN DESTINATION DETAILS AND ORIGIN DETAILS CITIES ARE OFTEN IN DIFFRENT ORDER
           let originCode = originAirport.split("-")[0]
           let destinationCode = destinationAirport.split("-")[0]
-          this.cas.getFlights(originAirport, destinationAirport).subscribe((res) => {
+          this.cas.getFlights(originAirport, destinationAirport, currency).subscribe((res) => {
             //GETTING FLIGHT INFO
             const info : any = res
             console.log(info);

@@ -56,6 +56,15 @@
                 </select>
             </ng-template>
         </ng-template>
+        <select [formControl]="ticketCurrencyControl">
+            <option
+            *ngFor="let currency of ticketCurrency; let i = index"
+            value="{{currency}}"
+            [selected]="currency == 'USD'"
+            >
+            {{currency}}
+            </option>
+        </select>
         <!--SIMPLE BUTTON FOR CHECKING PRICE-->
         <button 
         type="button" 
