@@ -14,19 +14,31 @@ export class DestinationFormComponent implements OnInit {
   destinationAirports : any;
   originAirportsControl = new FormControl();
   destinationAirportsControl = new FormControl();
+
   dataProblem : string = "";
   flights : any[] = [];
+
   selectedTicketControl : any;
   ticketNameAndSurname = new FormControl();
   ticketEmail = new FormControl();
   ticketCurrency : string[] = ['USD', 'JPY', 'EUR', 'PLN', 'CAD', 'CHF', 'GBP', 'AUD', 'CNY', 'RUB'];
   ticketCurrencyControl = new FormControl();
   
+  originCityControl = new FormControl();
+  destinationCityControl = new FormControl();
   constructor(private cas: CityAirportsService, private tss: TicketSystemService) {
     this.ticketCurrencyControl.setValue(this.ticketCurrency[0])
   }
 
   ngOnInit(): void {}
+  swapCities(){
+    let origin = this.originCityControl.value;
+    let destination = this.destinationCityControl.value
+    this.originCityControl.setValue(destination)
+    this.destinationCityControl.setValue(origin)
+    this.getAirports(this.originCityControl.value, 'origin')
+    this.getAirports(this.destinationCityControl.value, 'destination')
+  }
   getAirports(city : string, whichCities : string) : void {
     //SOMETIMES THERE ARE CITIES IN RESPONSE AND THEY CAUSE BUGS THIS FUNCTION DELETES THEM
     function deleteCities(airports: any){

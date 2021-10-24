@@ -6,6 +6,8 @@
         placeholder="From where" 
         #origin
         (keyup)="getAirports(origin.value, 'origin')"
+        (change)="getAirports(origin.value, 'origin')"
+        [formControl]="originCityControl"
         />
         <!--CHECKING IF ANYTHING IS PASSED-->
         <ng-container *ngIf="originAirports == undefined; else showOriginAirports">
@@ -35,6 +37,8 @@
         placeholder="Where" 
         #destination
         (keyup)="getAirports(destination.value, 'destination')"
+        (change)="getAirports(destination.value, 'destination')"
+        [formControl]="destinationCityControl"
         />
         <!--CHECKING IF ANYTHING IS PASSED-->
         <ng-container *ngIf="destinationAirports == undefined; else showDestinationAirports">
@@ -56,6 +60,9 @@
                 </select>
             </ng-template>
         </ng-template>
+        <button (click)="swapCities()">
+            SWAP
+        </button>
         <select [formControl]="ticketCurrencyControl">
             <option
             *ngFor="let currency of ticketCurrency; let i = index"
