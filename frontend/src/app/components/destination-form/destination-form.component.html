@@ -1,87 +1,105 @@
-<form>
-    <div>
-        <input 
-        type="text" 
-        name="fromWhere" 
-        placeholder="From where" 
-        #origin
-        (keyup)="getAirports(origin.value, 'origin')"
-        (change)="getAirports(origin.value, 'origin')"
-        [formControl]="originCityControl"
-        />
-        <!--CHECKING IF ANYTHING IS PASSED-->
-        <ng-container *ngIf="originAirports == undefined; else showOriginAirports">
-            <p>Pass a city</p>
-        </ng-container>
-        <!--WHEN SOMETHING IS PASSED IT'S GENERATING OPTIONS FOR AIRPORTS OR SHOWS THAT THERE ARE NOT ANY AIRPORT NEAR-->
-        <ng-template #showOriginAirports>
-            <ng-container *ngIf="originAirports == 'empty'; else originAirportsChoice">
-                <p>We dont have airports here</p>
+<div class="auto-rows-min mt-5 elf-center
+    sm:mx-5 sm:my-5
+    md:mx-10 md:my-10
+    lg:mx-20 lg:my-15
+    xl:mx-40 xl:my-20
+    2xl:mx-80 2xl:my-25
+    ">
+    <form class="grid
+        sm:grid-rows-3 sm:gap-y-5
+        md:grid-cols-3 md:grid-rows-1">
+        <div class="grid items-center">
+            <input 
+            type="text" 
+            name="fromWhere" 
+            placeholder="From where" 
+            #origin
+            (keyup)="getAirports(origin.value, 'origin')"
+            (change)="getAirports(origin.value, 'origin')"
+            [formControl]="originCityControl"
+            />
+            <!--CHECKING IF ANYTHING IS PASSED-->
+            <ng-container *ngIf="originAirports == undefined; else showOriginAirports">
+                <p class="justify-self-center">Pass a city</p>
             </ng-container>
-            <ng-template #originAirportsChoice>
-                <select [formControl]="originAirportsControl" multiple>
-                    <option 
-                    *ngFor="let airport of originAirports"
-                    value="{{airport.PlaceId}}">
-                    {{ airport.PlaceName }}
-                </option>
-                </select>
-            </ng-template>
-        </ng-template>
-    </div>
-
-    <div>
-        <input 
-        type="text" 
-        name="where" 
-        placeholder="Where" 
-        #destination
-        (keyup)="getAirports(destination.value, 'destination')"
-        (change)="getAirports(destination.value, 'destination')"
-        [formControl]="destinationCityControl"
-        />
-        <!--CHECKING IF ANYTHING IS PASSED-->
-        <ng-container *ngIf="destinationAirports == undefined; else showDestinationAirports">
-            <p>Pass a city</p>
-        </ng-container>
-        <!--WHEN SOMETHING IS PASSED IT'S GENERATING OPTIONS FOR AIRPORTS OR SHOWS THAT THERE ARE NOT ANY AIRPORT NEAR-->
-        <ng-template #showDestinationAirports>
-            <ng-container *ngIf="destinationAirports == 'empty'; else destinationAirportsChoice">
-                <p>We dont have airports here</p>
-            </ng-container>
-            <ng-template #destinationAirportsChoice>
-                <select [formControl]="destinationAirportsControl" multiple>
-                    <option 
-                    *ngFor="let airport of destinationAirports"
-                    value="{{airport.PlaceId}}"
-                    >
-                    {{ airport.PlaceName }}
+            <!--WHEN SOMETHING IS PASSED IT'S GENERATING OPTIONS FOR AIRPORTS OR SHOWS THAT THERE ARE NOT ANY AIRPORT NEAR-->
+            <ng-template #showOriginAirports>
+                <ng-container *ngIf="originAirports == 'empty'; else originAirportsChoice">
+                    <p class="justify-self-center">We dont have airports here</p>
+                </ng-container>
+                <ng-template #originAirportsChoice>
+                    <select [formControl]="originAirportsControl" multiple>
+                        <option 
+                        *ngFor="let airport of originAirports"
+                        value="{{airport.PlaceId}}">
+                        {{ airport.PlaceName }}
                     </option>
-                </select>
+                    </select>
+                </ng-template>
             </ng-template>
-        </ng-template>
-        <button (click)="swapCities()">
-            SWAP
-        </button>
-        <select [formControl]="ticketCurrencyControl">
-            <option
-            *ngFor="let currency of ticketCurrency; let i = index"
-            value="{{currency}}"
-            [selected]="currency == 'USD'"
-            >
-            {{currency}}
-            </option>
-        </select>
-        <!--SIMPLE BUTTON FOR CHECKING PRICE-->
-        <button 
-        type="button" 
-        (click)="checkPrices()"
-        >
-        CHECK PRICE
-        </button>
+        </div>
+        <div class="grid grid-rows-3 justify-items-center">
+            <button (click)="swapCities()">
+                SWAP
+            </button>
+            <select [formControl]="ticketCurrencyControl">
+                <option
+                *ngFor="let currency of ticketCurrency; let i = index"
+                value="{{currency}}"
+                [selected]="currency == 'USD'"
+                >
+                {{currency}}
+                </option>
+            </select>
+             <!--SIMPLE BUTTON FOR CHECKING PRICE-->
+             <button 
+             type="button" 
+             (click)="checkPrices()"
+             >
+             CHECK PRICE
+             </button>
+        </div>
+        <div class="grid items-center">
+            <input 
+            type="text" 
+            name="where" 
+            placeholder="Where" 
+            #destination
+            (keyup)="getAirports(destination.value, 'destination')"
+            (change)="getAirports(destination.value, 'destination')"
+            [formControl]="destinationCityControl"
+            />
+            <!--CHECKING IF ANYTHING IS PASSED-->
+            <ng-container *ngIf="destinationAirports == undefined; else showDestinationAirports">
+                <p class="justify-self-center">Pass a city</p>
+            </ng-container>
+            <!--WHEN SOMETHING IS PASSED IT'S GENERATING OPTIONS FOR AIRPORTS OR SHOWS THAT THERE ARE NOT ANY AIRPORT NEAR-->
+            <ng-template #showDestinationAirports>
+                <ng-container *ngIf="destinationAirports == 'empty'; else destinationAirportsChoice">
+                    <p class="justify-self-center">We dont have airports here</p>
+                </ng-container>
+                <ng-template #destinationAirportsChoice>
+                    <select [formControl]="destinationAirportsControl" multiple>
+                        <option 
+                        *ngFor="let airport of destinationAirports"
+                        value="{{airport.PlaceId}}"
+                        >
+                        {{ airport.PlaceName }}
+                        </option>
+                    </select>
+                </ng-template>
+            </ng-template>
+            <ng-template #noFlights>
+                <p class="text-center text-2xl">No flights avaiable</p>
+            </ng-template>
+        </div>
+    </form>
         <!--CHECKING IF THERE ARE FLIGHTS FROM CHOOSED AIRPORTS TO CHOOSED AIRPORTS-->
-        <div *ngIf="flights.length > 0; else noFlights">
-            <form (submit)="orderTicket($event)">
+    <div *ngIf="flights.length > 0; else noFlights">
+        <p class="text-center text-2xl">Avaiable tickets</p>
+        <form (submit)="orderTicket($event)"
+        class="grid">
+            <div class="max-h-64 overflow-y-auto border-t-2 border-b-2 border-black">
                 <ng-container *ngFor="let flight of flights; let i = index" >
                     <input 
                     type="radio" 
@@ -100,20 +118,18 @@
                     ></app-airport-button>
                     </label> 
                 </ng-container>
-                <div class="ticketInfos">
-                    <input type="text" 
-                    [formControl]=ticketNameAndSurname 
-                    placeholder="Name and surname">
-                    <input type="email" 
-                    [formControl]=ticketEmail 
-                    placeholder="E-Mail">
-                </div>
-                <button type="submit">BUY TICKETS</button>
-            </form>
-        </div>
-
-        <ng-template #noFlights>
-            <p>No flights avaiable</p>
-        </ng-template>
+            </div>
+            <div class="flex justify-evenly">
+                <input type="text" 
+                [formControl]=ticketNameAndSurname 
+                placeholder="Name and surname">
+                <input type="email" 
+                [formControl]=ticketEmail 
+                placeholder="E-Mail">
+                <button type="submit">
+                    BUY TICKETS
+                </button>
+            </div>
+        </form>
     </div>
-</form>
+</div>
