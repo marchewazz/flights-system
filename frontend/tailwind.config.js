@@ -1,5 +1,9 @@
 module.exports = {
-  purge: [],
+  mode: 'jit',
+  purge: [
+    './src/index.html',
+    './src/app/components/**/*.html',
+  ],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
@@ -7,5 +11,7 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: []
+  plugins: [
+    require('@tailwindcss/custom-forms'),
+  ]
 }
