@@ -12,6 +12,8 @@ export class DestinationFormComponent implements OnInit {
 
   originAirports : any;
   destinationAirports : any;
+  choosedOriginAirports : any = null;
+  choosedDestinationAirports :any = null;
   originAirportsControl = new FormControl();
   destinationAirportsControl = new FormControl();
 
@@ -71,12 +73,21 @@ export class DestinationFormComponent implements OnInit {
       });
     } else {
       //IF NOTHING PASSED IT'S JUST UNDEFINED
-      if (whichCities == 'origin') this.originAirports = undefined
-      if (whichCities == 'destination') this.destinationAirports = undefined
+      if (whichCities == 'origin') {
+        this.originAirports = undefined;
+        this.choosedOriginAirports = null;
+      }
+      if (whichCities == 'destination') {
+        this.destinationAirports = undefined
+        this.choosedDestinationAirports = null
+      }
       console.log(this.originAirports, this.destinationAirports);
     }
   }
-
+  catchChoosedAirports(){
+    this.choosedOriginAirports = this.originAirportsControl.value;
+    this.choosedDestinationAirports = this.destinationAirportsControl.value;
+  }
   checkPrices(){
     //THIS FUNCTION JUST CHECKS PRICE FROM ORIGINS TO DESTINATIONS
     interface Flight{
@@ -102,8 +113,8 @@ export class DestinationFormComponent implements OnInit {
       };
     } 
 
-    const originAirports : string[] = this.originAirportsControl.value;
-    const destinationAirports : string[] = this.destinationAirportsControl.value;
+    const originAirports : string[] = this.choosedOriginAirports;
+    const destinationAirports : string[] = this.choosedDestinationAirports;
     const currency = this.ticketCurrencyControl.value;
     //THESE VARIABLES STORE VALUES FROM FORM CONTROL, THEY ARE CODES OF THE CHOOSED AIRPORTS
     console.log(originAirports, destinationAirports);

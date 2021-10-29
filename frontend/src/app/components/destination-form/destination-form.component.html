@@ -1,17 +1,17 @@
-<div class="auto-rows-min mt-5 bg-white rounded-xl transition-all
-    sm:mx-10 sm:my-10 sm:py-10
-    md:mx-10 md:my-10 md:py-10
-    lg:mx-20 lg:my-15 lg:py-15
+<div class="auto-rows-min mt-5 bg-white rounded-xl transition-all mx-10 my-10 py-10 text-xs
+    sm:text-base
+    lg:mx-20 lg:my-15 lg:py-15 
     xl:mx-40 xl:my-20 xl:py-15
     2xl:mx-80 2xl:my-25 2xl:py-15
     ">
-    <form class="grid
+    <form class="grid mx-5
         sm:grid-rows-3 sm:gap-y-5
         md:grid-cols-3 md:grid-rows-1"
         autocomplete="off">
         <div class="grid items-center">
             <input 
-            class="form-input mt-1 block w-full text-center"
+            class="form-input mt-1 block w-full text-center
+            focus:border-b"
             type="text" 
             name="fromWhere" 
             placeholder="From where" 
@@ -31,7 +31,9 @@
                 </ng-container>
                 <ng-template #originAirportsChoice>
                     <select class="form-select mt-1 block w-full"
-                    [formControl]="originAirportsControl" multiple>
+                    (change)="catchChoosedAirports()"
+                    [formControl]="originAirportsControl" 
+                    multiple>
                         <option 
                         *ngFor="let airport of originAirports"
                         value="{{airport.PlaceId}}">
@@ -41,14 +43,22 @@
                 </ng-template>
             </ng-template>
         </div>
-        <div class="grid grid-rows-3 justify-items-center">
-            <button (click)="swapCities()">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div class="grid auto-rows-min justify-items-center">
+            <button class="border-2 border-black rounded-xl place-items-center transition duration-500 ease-in-out
+            hover:bg-black hover:border-white"
+            (click)="swapCities()">
+                <svg xmlns="http://www.w3.org/2000/svg" 
+                class="h-6 w-6 
+                hover:stroke-current hover:text-white" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                 </svg>
             </button>
             <select [formControl]="ticketCurrencyControl">
                 <option
+                class="select"
                 *ngFor="let currency of ticketCurrency; let i = index"
                 value="{{currency}}"
                 [selected]="currency == 'USD'"
@@ -58,16 +68,20 @@
             </select>
              <!--SIMPLE BUTTON FOR CHECKING PRICE-->
              <button 
-             class="btn btn-blue"
+             class="bg-green-500 rounded-md text-white transition duration-500 ease-in-out
+             hover:scale-110
+             disabled:bg-red-700 disabled:text-black"
              type="button" 
              (click)="checkPrices()"
+             [disabled]="choosedOriginAirports == null || choosedDestinationAirports == null"
              >
              CHECK PRICE
              </button>
         </div>
         <div class="grid items-center">
             <input 
-            class="form-input mt-1 block w-full text-center"
+            class="form-input mt-1 w-full text-center
+            focus:border-b"
             type="text" 
             name="where" 
             placeholder="Where" 
@@ -86,8 +100,11 @@
                     <p class="justify-self-center">We dont have airports here</p>
                 </ng-container>
                 <ng-template #destinationAirportsChoice>
-                    <select class="form-select mt-1 block w-full"
-                    [formControl]="destinationAirportsControl" multiple>
+                    <select class="form-select mt-1 block w-full
+                    active:bg-red-600"
+                    [formControl]="destinationAirportsControl" 
+                    (change)="catchChoosedAirports()"
+                    multiple>
                         <option 
                         *ngFor="let airport of destinationAirports"
                         value="{{airport.PlaceId}}"
@@ -123,9 +140,11 @@
                         [value]="flight"
                         [(ngModel)]="selectedTicketControl"
                         >
-                        <label class="peer-checked:bg-yellow-400 block"
+                        <label class="transition duration-300 ease-in-out rounded-lg
+                        peer-checked:bg-blue-700 block peer-checked:text-white"
                         for="{{i}}">
                             <app-airport-button  
+                            class="block p-5"
                             [carrier]=flight.carriers
                             [dateTime]=flight.dateTime
                             [originDetails]=flight.originDetails
@@ -136,14 +155,22 @@
                     </div>
                 </ng-container>
             </div>
-            <div class="flex justify-evenly h-20">
-                <input type="text" 
+            <div class="flex justify-evenly items-center h-20">
+                <input class="form-input mt-1 text-center
+                focus:border-b" 
+                type="text" 
                 [formControl]=ticketNameAndSurname 
                 placeholder="Name and surname">
-                <input type="email" 
+                <input class="form-input mt-1 text-center
+                focus:border-b"
+                type="email" 
                 [formControl]=ticketEmail 
                 placeholder="E-Mail">
-                <button type="submit">
+                <button class="bg-green-500 rounded-md text-white transition duration-500 ease-in-out
+                hover:scale-110
+                disabled:bg-red-700 disabled:text-black"
+                type="submit"
+                disabled>
                     BUY TICKETS
                 </button>
             </div>
