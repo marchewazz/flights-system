@@ -35,18 +35,20 @@ export class DestinationFormComponent implements OnInit {
 
   ngOnInit(): void {}
   swapCities(){
-    //to do
+    //IT'S SWAP FUNCTION IT'S NOT BEST WRITTEN SO READ IT
+    //CATCH INPUT TEXTS
     let origin = this.originCityControl.value;
     let destination = this.destinationCityControl.value;
-    console.log(origin, destination);
+    //SET THEIR CONTROLS
     this.originCityControl.setValue(destination)
     this.destinationCityControl.setValue(origin)
-    let newOrigin = this.originCityControl.value;
-    let newDestination = this.destinationCityControl.value;
-    this.choosedOriginAirports = null;
-    this.choosedDestinationAirports = null;
-    if(newOrigin != null) this.getAirports(newOrigin, 'origin')
-    if(newDestination != null) this.getAirports(newDestination, 'destination')
+    //SWAP CHOOSED AIRPORTS TOO
+    const temp = this.choosedOriginAirports
+    this.choosedOriginAirports = this.choosedDestinationAirports
+    this.choosedDestinationAirports = temp
+    //GET VALUES FOR OPTIONS IN SELECT BY NEW VALUES
+    if(destination != null) this.getAirports(destination, 'origin')
+    if(origin != null) this.getAirports(origin, 'destination')
   }
   getAirports(city : string, whichCities : string) : void {
     //SOMETIMES THERE ARE CITIES IN RESPONSE AND THEY CAUSE BUGS THIS FUNCTION DELETES THEM
