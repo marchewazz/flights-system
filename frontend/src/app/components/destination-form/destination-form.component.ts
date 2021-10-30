@@ -13,7 +13,7 @@ export class DestinationFormComponent implements OnInit {
   originAirports : any;
   destinationAirports : any;
   choosedOriginAirports : any = null;
-  choosedDestinationAirports :any = null;
+  choosedDestinationAirports : any = null;
   originAirportsControl = new FormControl();
   destinationAirportsControl = new FormControl();
 
@@ -43,6 +43,8 @@ export class DestinationFormComponent implements OnInit {
     this.destinationCityControl.setValue(origin)
     let newOrigin = this.originCityControl.value;
     let newDestination = this.destinationCityControl.value;
+    this.choosedOriginAirports = null;
+    this.choosedDestinationAirports = null;
     if(newOrigin != null) this.getAirports(newOrigin, 'origin')
     if(newDestination != null) this.getAirports(newDestination, 'destination')
   }

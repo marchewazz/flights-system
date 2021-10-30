@@ -1,7 +1,6 @@
-<div class="auto-rows-min mt-5 bg-white border-2 border-black rounded-xl transition-all mx-10 my-10 py-10 text-xs
-    sm:text-base
+<div class="auto-rows-min mt-5 bg-white border-2 border-black rounded-xl transition-all mx-10 my-10 py-10
     lg:mx-20 lg:my-15 lg:py-15 
-    xl:mx-40 xl:my-20 xl:py-15
+    xl:m-40 xl:py-15
     2xl:mx-80 2xl:my-25 2xl:py-15
     ">
     <form class="grid mx-5
@@ -48,7 +47,7 @@
             hover:bg-black hover:border-white"
             (click)="swapCities()">
                 <svg xmlns="http://www.w3.org/2000/svg" 
-                class="h-6 w-6 
+                class="h-6 w-6
                 hover:stroke-current hover:text-white" 
                 fill="none" 
                 viewBox="0 0 24 24" 
@@ -119,10 +118,11 @@
         </div>
     </form>
         <!--CHECKING IF THERE ARE FLIGHTS FROM CHOOSED AIRPORTS TO CHOOSED AIRPORTS-->
-    <div *ngIf="flights.length > 0; else noFlights">
+    <div  
+    *ngIf="flights.length > 0; else noFlights">
         <p class="text-center text-2xl">Choose a ticket</p>
         <form (submit)="orderTicket($event)"
-        class="grid">
+        class="">
             <div class="max-h-64 overflow-y-auto border-t-2 border-b-2 border-black
             sm:mx-5
             md:mx-10 
@@ -140,8 +140,8 @@
                         (change)="validateTicketData()"
                         [(ngModel)]="selectedTicketControl"
                         >
-                        <label class="transition duration-300 ease-in-out rounded-lg
-                        peer-checked:bg-blue-700 block peer-checked:text-white"
+                        <label class="transition duration-300 ease-in-out rounded-lg border-2 border-black
+                        peer-checked:bg-blue-700 block peer-checked:text-white peer-checked:border-white"
                         for="{{i}}">
                             <app-airport-button  
                             class="block p-5"
@@ -155,7 +155,7 @@
                     </div>
                 </ng-container>
             </div>
-            <div class="flex justify-evenly items-center h-20">
+            <div class="grid grid-cols-2 grid-rows-2">
                 <input class="form-input mt-1 text-center
                 focus:border-b" 
                 type="text" 
@@ -168,7 +168,7 @@
                 (keyup)="validateTicketData()"
                 [formControl]=ticketEmail 
                 placeholder="E-Mail">
-                <button class="bg-green-500 rounded-md text-white transition duration-500 ease-in-out
+                <button class="bg-green-500 rounded-md text-white transition duration-500 ease-in-out col-span-2 justify-self-center
                 hover:scale-110
                 disabled:bg-red-700 disabled:text-black"
                 type="submit"
