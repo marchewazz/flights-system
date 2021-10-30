@@ -4,11 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "postcss -i tailwind.css -o build.css --minify",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "dev": "TAILWIND_MODE=watch postcss -i tailwind.css -o build.css --watch",
-    "build": "postcss -i tailwind.css -o build.css --minify"
+    "dev": "TAILWIND_MODE=watch postcss -i tailwind.css -o build.css --watch"
   },
   "private": true,
   "dependencies": {
@@ -40,6 +39,7 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "postcss": "^8.3.11",
+    "tailwind-scrollbar": "^1.3.1",
     "tailwindcss": "^2.2.17",
     "typescript": "~4.3.5"
   }

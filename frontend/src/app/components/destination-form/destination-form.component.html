@@ -29,7 +29,9 @@
                     <p class="justify-self-center">We dont have airports here</p>
                 </ng-container>
                 <ng-template #originAirportsChoice>
-                    <select class="form-select mt-1 block w-full"
+                    <select class="form-select mt-1 block w-full
+                    scrollbar scrollbar-thumb-black scrollbar-track-blue-700
+                    hover:scrollbar-thumb-gray-300"
                     (change)="catchChoosedAirports()"
                     [formControl]="originAirportsControl" 
                     multiple>
@@ -99,7 +101,9 @@
                     <p class="justify-self-center">We dont have airports here</p>
                 </ng-container>
                 <ng-template #destinationAirportsChoice>
-                    <select class="form-select mt-1 block w-full"
+                    <select class="form-select mt-1 block w-full
+                    scrollbar scrollbar-thumb-black scrollbar-track-blue-700
+                    hover:scrollbar-thumb-gray-300"
                     [formControl]="destinationAirportsControl" 
                     (change)="catchChoosedAirports()"
                     multiple>
